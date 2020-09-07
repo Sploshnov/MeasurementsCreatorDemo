@@ -6,7 +6,7 @@ import { GripperPartSettings } from "models/GripperPartSettings";
 
 import { MeasuringService } from "./MeasuringService";
 import { MeasurementSettings } from "../models/MeasurementSettings";
-import { LabelSettings } from "../models/LabelSettings";
+
 
 import THREE = require("three");
 
@@ -41,56 +41,6 @@ export class THREEService {
         this.setupOrbitControls(this.canvas);
         this.animate();
     }
-
-    public createLabel(settings: LabelSettings, fontPath: string) {
-        this.fontLoader.load( fontPath, (font) => {this.addText(font, settings)});
-    }
-
-    private addText(font: Font, settings: LabelSettings) {
-        let geometry = new TextGeometry( settings.text, {
-            font: font,
-            size: settings.size,
-            height: settings.heigth,
-            curveSegments: 12,
-            bevelEnabled: false,
-            bevelThickness: 10,
-            bevelSize: 8,
-            bevelOffset: 0,
-            bevelSegments: 5
-        } );
-
-        let textMaterial = new MeshPhongMaterial( 
-            { 
-                color: settings.color, 
-                specular: settings.specular 
-            }
-          );
-        
-        let mesh = new Mesh( geometry, textMaterial );
-
-        /////////
-        mesh.position.set(0,0,0);
-
-        let measurement = MeasuringService.createMeasurement(
-            new Vector3(5, 0, 15),
-            new Vector3(5, 0, 60),
-            new Vector3(5, 5, 5),
-            new MeasurementSettings(15, new THREE.LineBasicMaterial({color : 0x000000}), true)
-        );
-
-        let lookPoint = new Vector3().addVectors(new Vector3(5, 0, 15), new Vector3(5, 0, 60)).multiplyScalar(1/2);
-
-        this.scene.add(measurement);
-
-        // mesh.lookAt(lookPoint);
-        // mesh.rotateZ(-Math.PI/2);
-
-        // var box = new THREE.Box3().setFromObject(mesh);
-        // console.log(box.min, box.max);
-        /////////
-        this.scene.add(mesh);
-    }
-
 
     public updatePart(settings: GripperPartSettings): void {
         this.scene.remove(this.gripperPart);
