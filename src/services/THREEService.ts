@@ -43,6 +43,15 @@ export class THREEService {
         this.scene.add(this.gripperPart);
     }
 
+    public updateCamera(target: Vector3, position: Vector3): void {
+        this.camera.position.x = position.x;
+        this.camera.position.y = position.y;
+        this.camera.position.z = position.z;
+
+        this.orbitControls.target.set(target.x, target.y, target.z);
+        this.orbitControls.update()
+    } 
+
     private animate():void {
         requestAnimationFrame( () => { this.animate(); });
 	    this.renderer.render( this.scene, this.camera );
