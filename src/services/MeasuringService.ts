@@ -1,6 +1,9 @@
-import { Vector3, Object3D, Line, BufferGeometry } from "three";
+import { Vector3, Object3D, Line, BufferGeometry, Vector2 } from "three";
+import { SpriteText2D, textAlign } from 'three-text2d'
+
 import { LineBasicMaterial } from "../../node_modules/three/src/materials/LineBasicMaterial";
 import { MeasurementSettings } from "../models/MeasurementSettings";
+import { TextOptions } from "three-text2d/lib/Text2D";
 
 export class MeasuringService {
     public static createMeasurement(start: Vector3, end: Vector3, planePoint: Vector3, settings: MeasurementSettings = null): Object3D {
@@ -18,8 +21,17 @@ export class MeasuringService {
         var line = new Line( lineGeometry, settings.material );
         line.add(this.createBrace(start, normalVector, settings.material));
         line.add(this.createBrace(end, normalVector, settings.material));
+        line.add(this.createValueSprite(start, end, normalVector, settings.textOptions))
 
         return line;
+    }
+
+    public static getDefaultSettings(): MeasurementSettings {
+        return new MeasurementSettings(10, new LineBasicMaterial( { color: 0x000000 } ), false, this.getDefaultTextOptions());
+    }
+
+    public static getDefaultTextOptions(): TextOptions {
+        return { align: textAlign.center,  font: '15px Arial', fillStyle: '#000000' , antialias: false };
     }
 
     private static getPlaneNormalVector(p1: Vector3, p2:Vector3, p3: Vector3, length: number): Vector3 {
@@ -39,7 +51,10 @@ export class MeasuringService {
         return new Line( geometry, material );
     }
 
-    public static getDefaultSettings(): MeasurementSettings {
-        return new MeasurementSettings(10, new LineBasicMaterial( { color: 0x000000 } ), false);
+    private static createValueSprite(start: Vector3, end: Vector3, normalVector: Vector3, options: TextOptions): Object3D {
+        var textSprite = new SpriteText2D(new Vector3().add(end).sub(start).length().toString(), options)
+        var position = new Vector3().add(end).add(normalVector).add(start).add(normalVector).multiplyScalar(0.5)
+        textSprite.position.set(position.x, position.y, position.z)
+        return textSprite
     }
 }

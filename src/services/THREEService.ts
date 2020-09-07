@@ -1,12 +1,7 @@
 import { Scene, PerspectiveCamera, WebGLRenderer, Vector3, FontLoader, Mesh, Font, TextGeometry, MeshPhongMaterial } from "three";
 import { OrbitControls } from 'three-examples/controls/OrbitControls';
 import { GripperPart } from "../models/GripperPart";
-import { GripperPartSettings } from "models/GripperPartSettings";
-
-
-import { MeasuringService } from "./MeasuringService";
-import { MeasurementSettings } from "../models/MeasurementSettings";
-
+import { GripperPartSettings } from "models/GripperPartSettings"
 
 import THREE = require("three");
 
