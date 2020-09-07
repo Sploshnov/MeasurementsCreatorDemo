@@ -1,0 +1,11 @@
+node_modules
+/.src
+web/js/main.js
+/.vs
+web/images/*
+
+/web/cad/*
+/web/js/main.js.map
+/doc/*.pdf
+/web/images
+/web/js

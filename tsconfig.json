@@ -1,0 +1,19 @@
+{
+	"compilerOptions": {
+		"module": "commonjs",
+		"target": "esnext",
+		"sourceMap": true,
+		"moduleResolution": "node",
+		"lib": ["esnext", "dom"],
+		"outDir": ".src/dist/out-tsc",
+		"baseUrl": "./src",
+		"allowJs": true,
+		"preserveConstEnums": false,
+		"paths": {
+			"three-examples/*": ["../node_modules/three/examples/jsm/*"]
+		}
+	},
+	"exclude": [
+		"node_modules"
+	]
+}

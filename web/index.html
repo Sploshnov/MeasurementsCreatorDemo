@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>3D Mirror Configurator</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-12">
+                    <canvas id="canvas" height="600" width="1200"></canvas>
+                </div>
+             </div>
+             <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="P1">P1:</span>
+                    </div>
+                    <input type="text" class="form-control" id="p1Input" aria-describedby="P1" value="50">
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="P1">P2:</span>
+                    </div>
+                    <input type="text" class="form-control" id="p2Input" aria-describedby="P2" value="40">
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="P1">P3:</span>
+                    </div>
+                    <input type="text" class="form-control" id="p3Input" aria-describedby="P3" value="15">
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="P1">P4:</span>
+                    </div>
+                    <input type="text" class="form-control" id="p4Input" aria-describedby="P4" value="20">
+                </div>
+             </div>
+
+             <div class="row">
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text" id="P1">P5:</span>
+                    </div>
+                    <input type="text" class="form-control" id="p5Input" aria-describedby="P5" value="5">
+                </div>
+             </div>
+
+             <div class="row text-center">
+                <div class="col-4 offset-4">
+                    <button class="btn btn-primary" id="apply">Apply changes</button>
+                </div>
+             </div>
+        </div>
+
+        
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
+        <script src="js/main.js"></script>
+        <script>
+            var threeService = new Bundle.THREEService(document.getElementById("canvas"));
+            threeService.init();
+
+            
+            $('#apply').click(function () {
+                let settings = new Bundle.GripperPartSettings(
+                    parseInt($('#p1Input').val(), 10),
+                    parseInt($('#p2Input').val(), 10),
+                    parseInt($('#p3Input').val(), 10),
+                    parseInt($('#p4Input').val(), 10),
+                    parseInt($('#p5Input').val(), 10)
+                );
+                
+                threeService.updatePart(settings);
+            });
+
+        </script>
+    </body>
+</html>
